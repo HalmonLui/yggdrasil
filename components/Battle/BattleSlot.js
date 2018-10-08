@@ -18,9 +18,10 @@ export default class BattleSlot extends Component {
       <View style={styles.container}>
         <StatusBar hidden/>
         <TouchableOpacity
-          
-          style={styles.buttonContainer}>
+          style={styles.buttonContainer}
+          onPress={this.props.onPress}>
             <Text style={styles.buttonText}>{this.props.name}</Text>
+            <Text style={styles.buttonText}>Damage: {this.props.damage}</Text>
         </TouchableOpacity>
       </View>
 
