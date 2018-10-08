@@ -12,6 +12,10 @@ export default class BattleButtons extends Component {
       ]
     );
   }
+  battle() {
+    const { navigate } = this.props.navigation;
+    navigate('Battle');
+  }
 
   render(){
     return (
@@ -20,7 +24,7 @@ export default class BattleButtons extends Component {
           barStyle="light-content"
           />
         <TouchableOpacity
-          onPress = {this.showAlert}
+          onPress = {this.battle.bind(this)}
           style={styles.pveButtonContainer}>
             <Text style={styles.buttonText}>PvE</Text>
         </TouchableOpacity>

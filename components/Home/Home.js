@@ -26,7 +26,7 @@ export default class Home extends Component {
             <TaskButtons style={styles.TaskButtons}/>
           </View>
           <View style={styles.battleButtonContainer}>
-            <BattleButtons/>
+            <BattleButtons navigation = {this.props.navigation}/>
           </View>
           <View style={styles.bagUnlockButtonContainer}>
             <BagUnlock/>
