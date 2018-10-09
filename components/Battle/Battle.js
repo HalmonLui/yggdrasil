@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, Text, ScrollView, ImageBackground, TouchableOpacity, FlatList } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 import BattleSlot from './BattleSlot';
 import DeathKnight from '../../Images/Battle/Death_Knight_Databook_01.png';
 import Kirito from '../../Images/Battle/kirito.jpg';
+import Firework from '../../Images/Battle/firework.png';
 export default class Battle extends Component {
   constructor() {
     super()
@@ -28,6 +30,7 @@ export default class Battle extends Component {
           },
         }
       }},
+      isDead: false,
     };
   }
 
@@ -71,25 +74,41 @@ export default class Battle extends Component {
       .then((resp) => {
       })
   }
-
+  deadCheck = (deathKnight) => {
+    if (deathKnight.currentHP > 0){
+      console.log(deathKnight.currentHP);
+      this.updateEnemyData(deathKnight.currentHP);
+      this.getEnemyData();
+    }
+    else{
+      console.log(deathKnight.currentHP);
+      deathKnight.currentHP = 0;
+      this.updateEnemyData(deathKnight.maxHP);
+      this.setState({isDead : true});
+      this.timeoutHandle = setTimeout(() => {
+        const { navigate } = this.props.navigation;
+        navigate('Home');
+      }, 2000);
+    }
+  }
   jab = () => {
     let deathKnight = this.state.deathKnight;
     let userSkills = this.state.userData.nom.skills.skill3;
     deathKnight.currentHP = deathKnight.currentHP - userSkills.damage;
-    console.log(deathKnight.currentHP);
-    this.updateEnemyData(deathKnight.currentHP);
-    this.getEnemyData();
+    this.deadCheck(deathKnight);
   }
   opAnimePower = () => {
     let deathKnight = this.state.deathKnight;
     let userSkills = this.state.userData.nom.skills.skill2;
     deathKnight.currentHP = deathKnight.currentHP - userSkills.damage;
     console.log(deathKnight.currentHP);
+    this.deadCheck(deathKnight);
   }
 
   render(){
     let deathKnight = this.state.deathKnight;
     let userSkills = this.state.userData.nom.skills;
+    let isDead = this.state.isDead;
     return (
       <ImageBackground source={require('../../Images/Battle/anime_forest.jpg')} style={styles.container}>
         <View style={styles.enemySide}>
@@ -103,7 +122,7 @@ export default class Battle extends Component {
             <BattleSlot name='Shield'/>
             <BattleSlot name='Defense Buff'/>
           </View>
-          <Image source = {DeathKnight} style = {styles.enemySprite} />
+          <Image source = {isDead ? Firework : DeathKnight} style = {styles.enemySprite} />
         </View>
         <View style={styles.userSide}>
           <Image source = {Kirito} style = {styles.userSprite} />
