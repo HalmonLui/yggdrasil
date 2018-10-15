@@ -11,15 +11,16 @@ export default class Home extends Component {
   logout() {
     const { navigate } = this.props.navigation;
     AsyncStorage.clear();
-    navigate('Login');
+    navigate('Loading');
+    console.log('logged out');
   }
 
   render(){
     return (
-      <ImageBackground source={require('../../Images/Home/mystical-forest-fantasy-forest.jpg')} style={styles.container}>
+      <ImageBackground keyboardShouldPersistTaps='always' source={require('../../Images/Home/mystical-forest-fantasy-forest.jpg')} style={styles.container}>
         <StatusBar hidden />
         <InfoBar navigation = {this.props.navigation}/>
-          <View style={styles.buttonContainer}>
+          <View keyboardShouldPersistTaps='always' style={styles.buttonContainer}>
             <TouchableOpacity onPress={this.logout.bind(this)} style={styles.Logout}>
               <Text> Logout </Text>
             </TouchableOpacity>

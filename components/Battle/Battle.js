@@ -50,7 +50,7 @@ export default class Battle extends Component {
   }
 
   getUserData() {
-    fetch('http://yggdrasil.serveo.net/users/5bbac0d1a689d2c9c553e780')
+    fetch('http://yggdrasil.serveo.net/users/5bbc068ea7360c1d840a92e6')
       .then(res => res.json())
       .then((resp) => {
         console.log(resp);
@@ -110,7 +110,7 @@ export default class Battle extends Component {
     let userSkills = this.state.userData.nom.skills;
     let isDead = this.state.isDead;
     return (
-      <ImageBackground source={require('../../Images/Battle/anime_forest.jpg')} style={styles.container}>
+      <ImageBackground keyboardShouldPersistTaps='always' source={require('../../Images/Battle/anime_forest.jpg')} style={styles.container}>
         <View style={styles.enemySide}>
           <Text style={styles.enemyInfo}>HP: {deathKnight.currentHP}</Text>
           <TouchableOpacity onClick = {this.dodge} style = {styles.dodge}>
@@ -124,9 +124,9 @@ export default class Battle extends Component {
           </View>
           <Image source = {isDead ? Firework : DeathKnight} style = {styles.enemySprite} />
         </View>
-        <View style={styles.userSide}>
+        <View keyboardShouldPersistTaps='always' style={styles.userSide}>
           <Image source = {Kirito} style = {styles.userSprite} />
-          <View style={styles.battleSlotContainer}>
+          <View keyboardShouldPersistTaps='always' style={styles.battleSlotContainer}>
             <BattleSlot name={JSON.stringify(userSkills.skill1.name)} damage={JSON.stringify(userSkills.skill1.damage)}/>
             <BattleSlot onPress = {this.opAnimePower} name={JSON.stringify(userSkills.skill2.name)} damage={JSON.stringify(userSkills.skill2.damage)}/>
             <BattleSlot onPress = {this.jab} name={JSON.stringify(userSkills.skill3.name)} damage={JSON.stringify(userSkills.skill3.damage)}/>

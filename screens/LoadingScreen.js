@@ -17,7 +17,7 @@ export default class LoadingScreen extends React.Component {
   }
 
   _bootstrapAsync = async () => {
-    const userToken = await AsyncStorage.getItem('userToken');
+    const userToken = await AsyncStorage.getItem('user');
     this.props.navigation.navigate(userToken ? 'Main' : 'Login')
   };
 

@@ -35,7 +35,7 @@ export default class LoginForm extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: this.state.username,
+        username: this.state.username.toLowerCase(),
         password: this.state.password,
       })
     })
